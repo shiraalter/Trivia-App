@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Trivia App</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="title_activity_settings">Settings</string>
+    <string name="title_activity_statistics">Statistics</string>
+
+    <string name="key_use_auto_save">AUTO_SAVE</string>
+    <string name="title_use_auto_save">Use Auto-Save</string>
+</resources>
