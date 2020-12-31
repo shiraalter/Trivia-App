@@ -7,6 +7,7 @@
 
     <string name="key_use_auto_save">AUTO_SAVE</string>
     <string name="title_use_auto_save">Use Auto-Save</string>
+
     <string name="fab">FAB</string>
     <string name="correct_message">Good Job! Onto the next question</string>
     <string name="incorrect_answer_message">Wrong! Game over. \nPress New Game to play again</string>
@@ -16,7 +17,22 @@
     <string name="option_4">Option 4</string>
     <string name="question_goes_here">Question goes here</string>
     <string name="new_game">New Game</string>
-    <string name="view_statistics">View Statistics</string>
-    <string name="about">About</string>
     <string name="next_question">Next Question</string>
+
+    <string name="auto_save_key">Auto-Save</string>
+    <string name="auto_save_off">On exit, the game in progress will not be saved</string>
+    <string name="auto_save_on">On exit, the game in progress will be saved</string>
+    <string name="auto_save_title">Auto-Save Game on Exit</string>
+
+    <string name="display_header">Display</string>
+    <string name="game_header">Game</string>
+    <string name="statistics">Statistics</string>
+    <string name="new_game">New Game</string>
+    <string name="about">About</string>
+    <!--
+        <string name="night_mode_key">Night Mode</string>
+        <string name="night_mode_title">Night/Dark Mode</string>
+        <string name="night_mode_off">Never use Night/Dark Mode</string>
+        <string name="night_mode_on">Use Night/Dark Mode (unless disabled in OS Settings)</string>
+        <string name="title_activity_settings2">SettingsActivity2</string>-->
 </resources>

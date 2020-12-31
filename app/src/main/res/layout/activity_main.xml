@@ -7,10 +7,8 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <include layout="@layout/actionbar" />
+    <include layout="@layout/toolbar" />
     <include layout="@layout/content_main" />
     <include layout="@layout/main_include_bottom_bar_and_fab"/>
-
-
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

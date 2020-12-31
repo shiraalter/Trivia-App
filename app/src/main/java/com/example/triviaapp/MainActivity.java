@@ -7,6 +7,7 @@ import android.os.Bundle;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -17,15 +18,25 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import static androidx.preference.PreferenceManager.getDefaultSharedPreferences;
+import static lib.DialogUtils.showInfoDialog;
 
 public class MainActivity extends AppCompatActivity {
     private Snackbar mSnackBar;
+    // Preference booleans; indicates if these respective settings currently enabled/disabled
+    private boolean mPrefUseAutoSave;
+
+    // Name of Preference file on device
+    private final String mKeyPrefsName = "PREFS";
+    // Preference Keys: values are already in strings.xml and will be assigned to these in onCreate
+    private String mKeyAutoSave;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         setupToolbar();
         setupFAB();
+        restoreAppSettingsFromPrefs();
 
         mSnackBar =
                 Snackbar.make(findViewById(android.R.id.content), "Welcome!",
@@ -48,6 +59,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    //creates menu options
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -56,31 +68,98 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
+    protected void onStop() {
+        saveToSharedPref();
+        super.onStop();
+    }
+    private void saveToSharedPref() {
+        // Create a SP reference to the prefs file on the device whose name matches mKeyPrefsName
+        // If the file on the device does not yet exist, then it will be created
+        SharedPreferences preferences = getSharedPreferences(mKeyPrefsName, MODE_PRIVATE);
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            showSettings();
-            return true;
-        }
+        // Create an Editor object to write changes to the preferences object above
+        SharedPreferences.Editor editor = preferences.edit();
 
-        return super.onOptionsItemSelected(item);
+        // clear whatever was set last time
+        editor.clear();
+
+        // save the settings (Show Errors and Use AutoSave)
+        saveSettingsToSharedPrefs(editor);
+
+        // if autoSave is on then save the board
+        saveGameAndBoardToSharedPrefsIfAutoSaveIsOn(editor);
+
+        // apply the changes to the XML file in the device's storage
+        editor.apply();
     }
 
-    private void showSettings() {
+    private void saveGameAndBoardToSharedPrefsIfAutoSaveIsOn(SharedPreferences.Editor editor) {
+        System.out.println("placeholder");
+    }
+
+    private void saveSettingsToSharedPrefs(SharedPreferences.Editor editor) {
+         // save "autoSave" preference
+        editor.putBoolean(mKeyAutoSave, mPrefUseAutoSave);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         dismissSnackBarIfShown();
-        Intent intent = new Intent(getApplicationContext(), SettingsActivity.class);
-        startActivityForResult(intent, 1);
+
+        int itemId = item.getItemId();
+        switch (itemId) {
+            case R.id.action_about:
+                showAbout();
+                return true;
+            case R.id.action_toggle_auto_save:
+                toggleMenuItem(item);
+                mPrefUseAutoSave = item.isChecked();
+                return true;
+            case R.id.action_statistics:
+                showStatistics();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    private void showStatistics() {
+        Intent intent = new Intent(getApplicationContext(), StatisticsActivity.class);
+        startActivity(intent);
     }
 
     private void dismissSnackBarIfShown() {
-        if (mSnackBar.isShown()) {
+        if (mSnackBar.isShown())
             mSnackBar.dismiss();
-        }
     }
 
+    public void startNewGame(@SuppressWarnings("UnusedParameters") MenuItem item) {
+        startNewGame();
+    }
+
+        private void startNewGame() {
+           // startGameAndSetBoard(new PMGame(), null, R.string.welcome_new_game);
+            System.out.println("you clicked new game!");
+        }
+
+
+    private void showAbout() {
+        showInfoDialog(this, "Trivia App", "Welcome to our Trivia App!");
+    }
+
+    private void toggleMenuItem(MenuItem item) {
+        item.setChecked(!item.isChecked());
+    }
+
+    private void restoreAppSettingsFromPrefs() {
+        // Since this is for reading only, no editor is needed unlike in saveRestoreState
+        SharedPreferences preferences = getSharedPreferences(mKeyPrefsName, MODE_PRIVATE);
+
+        // restore AutoSave preference value
+        mPrefUseAutoSave = preferences.getBoolean(mKeyAutoSave, true);
+    }
+
+
+
 }
+
