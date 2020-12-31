@@ -8,6 +8,17 @@
     <string name="key_use_auto_save">AUTO_SAVE</string>
     <string name="title_use_auto_save">Use Auto-Save</string>
 
+    <string name="fab">FAB</string>
+    <string name="correct_message">Good Job! Onto the next question</string>
+    <string name="incorrect_answer_message">Wrong! Game over. \nPress New Game to play again</string>
+    <string name="option_1">Option 1</string>
+    <string name="option_2">Option 2</string>
+    <string name="option_3">Option 3</string>
+    <string name="option_4">Option 4</string>
+    <string name="question_goes_here">Question goes here</string>
+    <string name="new_game">New Game</string>
+    <string name="next_question">Next Question</string>
+
     <string name="auto_save_key">Auto-Save</string>
     <string name="auto_save_off">On exit, the game in progress will not be saved</string>
     <string name="auto_save_on">On exit, the game in progress will be saved</string>
@@ -18,20 +29,10 @@
     <string name="statistics">Statistics</string>
     <string name="new_game">New Game</string>
     <string name="about">About</string>
-    <!-- Strings used for fragments for navigation -->
-    <string name="first_fragment_label">First Fragment</string>
-    <string name="second_fragment_label">Second Fragment</string>
-    <string name="next">Next</string>
-    <string name="previous">Previous</string>
-
-    <string name="hello_first_fragment">Hello first fragment</string>
-    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <!--
         <string name="night_mode_key">Night Mode</string>
         <string name="night_mode_title">Night/Dark Mode</string>
         <string name="night_mode_off">Never use Night/Dark Mode</string>
         <string name="night_mode_on">Use Night/Dark Mode (unless disabled in OS Settings)</string>
         <string name="title_activity_settings2">SettingsActivity2</string>-->
-
-
 </resources>
