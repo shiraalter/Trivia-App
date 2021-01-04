@@ -27,4 +27,5 @@
     <string name="statistics">View Statistics</string>
 
     <string name="about">About</string>
+    <string name="reset_stats">Reset Stats</string>
 </resources>

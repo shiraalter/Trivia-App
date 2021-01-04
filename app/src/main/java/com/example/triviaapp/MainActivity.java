@@ -29,8 +29,7 @@ public class MainActivity extends AppCompatActivity {
     private Button option1Button, option2Button, option3Button, option4Button;
     private Question currentQuestion;
     private QuestionBank questionBank;
-    private int score;
-
+    private int score, gamesWon, totalGamesPlayed, gamesLost;
 
 
 
@@ -69,6 +68,11 @@ public class MainActivity extends AppCompatActivity {
         currentQuestion = questionBank.getNextQuestion();
         this.showQuestion(currentQuestion);
 
+         score = 0;
+         gamesWon = 0;
+         totalGamesPlayed = 0;
+         gamesLost = 0;
+
     }
 
     private void setButtonListeners() {
@@ -103,12 +107,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 int indexOfOptionSelected = 3;
-
                 validateChoice(indexOfOptionSelected);
-
             }
         });
-
     }
 
     private void validateChoice(int indexOfOptionSelected) {
@@ -123,15 +124,28 @@ public class MainActivity extends AppCompatActivity {
                 this.showQuestion(currentQuestion);
             }
             else{
-                showInfoDialog(this, "GAME OVER","GREAT JOB! YOU WON! You can restart the game or exit the application");
-                //TODO: disable buttons
-            }
+                showInfoDialog(this, "YOU WON!!!","GREAT JOB! You can restart the game or exit the application");
 
+                gamesWon++;
+                totalGamesPlayed++;
+            }
 
         }
         else{
             feedbackTextView.setText(R.string.incorrect_answer_message);
+
+            disableButtons();
+
+            gamesLost++;
+            totalGamesPlayed++;
         }
+    }
+
+    private void disableButtons() {
+        option1Button.setEnabled(false);
+        option2Button.setEnabled(false);
+        option3Button.setEnabled(false);
+        option4Button.setEnabled(false);
     }
 
 
@@ -204,9 +218,19 @@ public class MainActivity extends AppCompatActivity {
             case R.id.new_game:
                 startNewGame();
                 return true;
+            case R.id.reset_stats:
+                resetStats();
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    private void resetStats() {
+        gamesLost = 0;
+        gamesWon = 0;
+        totalGamesPlayed = 0;
+        //reset stats activity
     }
 
     private void showStatistics() {
@@ -217,12 +241,21 @@ public class MainActivity extends AppCompatActivity {
 
 
         private void startNewGame() {
-           // startGameAndSetBoard(new PMGame(), null, R.string.welcome_new_game);
+
+            enableButtons();
+
             questionBank = createQuestionBank();
             currentQuestion = questionBank.getNextQuestion();
             this.showQuestion(currentQuestion);
 
         }
+
+    private void enableButtons() {
+        option1Button.setEnabled(true);
+        option2Button.setEnabled(true);
+        option3Button.setEnabled(true);
+        option4Button.setEnabled(true);
+    }
 
 
     private void showAbout() {
