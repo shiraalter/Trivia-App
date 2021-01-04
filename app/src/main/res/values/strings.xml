@@ -24,14 +24,7 @@
     <string name="auto_save_on">On exit, the game in progress will be saved</string>
     <string name="auto_save_title">Auto-Save Game on Exit</string>
 
-    <string name="display_header">Display</string>
-    <string name="game_header">Game</string>
-    <string name="statistics">Statistics</string>
+    <string name="statistics">View Statistics</string>
+
     <string name="about">About</string>
-    <!--
-        <string name="night_mode_key">Night Mode</string>
-        <string name="night_mode_title">Night/Dark Mode</string>
-        <string name="night_mode_off">Never use Night/Dark Mode</string>
-        <string name="night_mode_on">Use Night/Dark Mode (unless disabled in OS Settings)</string>
-        <string name="title_activity_settings2">SettingsActivity2</string>-->
 </resources>
