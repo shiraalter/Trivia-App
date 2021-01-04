@@ -43,9 +43,9 @@
         </item>
     </style>
 
-    <!--<style name="Theme.TriviaApp.NoActionBar.SplashScreenTheme">
+    <style name="Theme.TriviaApp.NoActionBar.SplashScreenTheme">
         <item name="android:background">@drawable/splash_background</item>
-    </style>-->
+    </style>
 
     <style name="Theme.TriviaApp.AppBarOverlay" parent="ThemeOverlay.MaterialComponents.Dark.ActionBar" />
 

@@ -12,21 +12,22 @@
         <activity
             android:name=".StatisticsActivity"
             android:label="@string/title_activity_statistics"
-            android:theme="@style/Theme.TriviaApp.NoActionBar"></activity>
+            android:theme="@style/Theme.TriviaApp.NoActionBar" />
         <!-- SPLASH -->
-        <activity android:name=".SplashActivity">
-
-            <!--
-            android:theme="@style/Theme.Theme.TriviaApp.NoActionBar.SplashScreenTheme">
+        <activity
+            android:name="SplashActivity"
+            android:label="@string/app_name"
+            android:theme="@style/Theme.TriviaApp.NoActionBar.SplashScreenTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-            -->
-        </activity> <!-- MAIN -->
+        </activity>
+
+        <!-- MAIN -->
         <activity
-            android:name=".MainActivity"
+            android:name="MainActivity"
             android:label="@string/app_name"
             android:theme="@style/Theme.TriviaApp.NoActionBar">
             <intent-filter>
