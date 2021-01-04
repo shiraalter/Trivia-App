@@ -20,22 +20,23 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/correct_answer"
+                android:id="@+id/feedbackMessage"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="start"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
                 android:textColor="@android:color/primary_text_dark"
-                android:text="@string/correct_message" />
+                 />
 
-            <TextView
+<!--            <TextView
                 android:id="@+id/incorrect_answer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="start"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
                 android:textColor="@android:color/primary_text_dark"
-                android:text="@string/incorrect_answer_message"/>
+                android:text="@string/incorrect_answer_message"/>-->
+
         </LinearLayout>
     </com.google.android.material.bottomappbar.BottomAppBar>
 
