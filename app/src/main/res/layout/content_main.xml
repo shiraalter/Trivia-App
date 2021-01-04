@@ -65,13 +65,6 @@
                 android:padding="16dp"
                 android:text="@string/option_4" />
 
-            <Button
-                android:id="@+id/next_question_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="8dp"
-                android:padding="16dp"
-                android:text="@string/next_question" />
         </LinearLayout>
     </ScrollView>
 
