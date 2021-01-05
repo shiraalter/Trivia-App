@@ -22,7 +22,7 @@ import java.util.Arrays;
 import static lib.DialogUtils.showInfoDialog;
 
 public class MainActivity extends AppCompatActivity {
-    private Snackbar mSnackBar;
+
 
 
     private TextView questionTextView, feedbackTextView;
@@ -32,16 +32,6 @@ public class MainActivity extends AppCompatActivity {
     private int score, gamesWon, totalGamesPlayed, gamesLost;
 
 
-
-
-    // Preference booleans; indicates if these respective settings currently enabled/disabled
-    private boolean mPrefUseAutoSave;
-
-    // Name of Preference file on device
-    private final String mKeyPrefsName = "PREFS";
-    // Preference Keys: values are already in strings.xml and will be assigned to these in onCreate
-    private String mKeyAutoSave;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
         setupToolbar();
         setupFAB();
         setButtonListeners();
-        //restoreAppSettingsFromPrefs();
+
 
 
     }
@@ -125,7 +115,7 @@ public class MainActivity extends AppCompatActivity {
             }
             else{
                 showInfoDialog(this, "YOU WON!!!","GREAT JOB! You can restart the game or exit the application");
-
+                disableButtons();
                 gamesWon++;
                 totalGamesPlayed++;
             }
@@ -194,7 +184,6 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onStop() {
-       // saveToSharedPref();
         super.onStop();
     }
 
@@ -210,7 +199,7 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             case R.id.action_toggle_auto_save:
                 toggleMenuItem(item);
-                mPrefUseAutoSave = item.isChecked();
+              //  mPrefUseAutoSave = item.isChecked();
                 return true;
             case R.id.action_statistics:
                 showStatistics();
@@ -241,7 +230,6 @@ public class MainActivity extends AppCompatActivity {
 
 
         private void startNewGame() {
-
             enableButtons();
 
             questionBank = createQuestionBank();
@@ -268,87 +256,6 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-   /* private void restoreAppSettingsFromPrefs() {
-        // Since this is for reading only, no editor is needed unlike in saveRestoreState
-        SharedPreferences preferences = getSharedPreferences(mKeyPrefsName, MODE_PRIVATE);
-
-        // restore AutoSave preference value
-        mPrefUseAutoSave = preferences.getBoolean(mKeyAutoSave, true);
-    }
-
-    private void saveGameAndBoardToSharedPrefsIfAutoSaveIsOn(SharedPreferences.Editor editor) {
-        System.out.println("placeholder");
-    }
-
-    private void saveSettingsToSharedPrefs(SharedPreferences.Editor editor) {
-        // save "autoSave" preference
-        editor.putBoolean(mKeyAutoSave, mPrefUseAutoSave);
-    }
-    private void saveToSharedPref() {
-        // Create a SP reference to the prefs file on the device whose name matches mKeyPrefsName
-        // If the file on the device does not yet exist, then it will be created
-        SharedPreferences preferences = getSharedPreferences(mKeyPrefsName, MODE_PRIVATE);
-
-        // Create an Editor object to write changes to the preferences object above
-        SharedPreferences.Editor editor = preferences.edit();
-
-        // clear whatever was set last time
-        editor.clear();
-
-        // save the settings (Show Errors and Use AutoSave)
-        saveSettingsToSharedPrefs(editor);
-
-        // if autoSave is on then save the board
-        saveGameAndBoardToSharedPrefsIfAutoSaveIsOn(editor);
-
-        // apply the changes to the XML file in the device's storage
-        editor.apply();
-    }
-*/
 
 
 }
