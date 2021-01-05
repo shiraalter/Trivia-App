@@ -1,11 +1,9 @@
 package com.example.triviaapp;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -20,14 +18,10 @@ import android.widget.TextView;
 
 import java.util.Arrays;
 
-import static androidx.preference.PreferenceManager.getDefaultSharedPreferences;
 import static lib.DialogUtils.showInfoDialog;
 
 public class MainActivity extends AppCompatActivity {
-
-
-
-    private TextView questionTextView, feedbackTextView;
+    private TextView questionTextView, scoreTextView;
     private Button option1Button, option2Button, option3Button, option4Button;
     private Question currentQuestion;
     private QuestionBank questionBank;
@@ -42,21 +36,19 @@ public class MainActivity extends AppCompatActivity {
         setupToolbar();
         setupFAB();
         setButtonListeners();
-
-
-
     }
 
     private void setupFields() {
         questionTextView = findViewById(R.id.question);
-        feedbackTextView = findViewById(R.id.feedbackMessage);
+        scoreTextView = findViewById(R.id.scoreUpdate);
+        scoreTextView.setText(getString(R.string.updated_score) + score);
+
         option1Button = findViewById(R.id.option1);
         option2Button = findViewById(R.id.option2);
         option3Button = findViewById(R.id.option3);
         option4Button = findViewById(R.id.option4);
 
         questionBank = createQuestionBank();
-
         currentQuestion = questionBank.getNextQuestion();
         this.showQuestion(currentQuestion);
 
@@ -107,8 +99,8 @@ public class MainActivity extends AppCompatActivity {
     private void validateChoice(int indexOfOptionSelected) {
         if(indexOfOptionSelected == currentQuestion.getAnswerIndex()){
             //answer is correct!
-            feedbackTextView.setText(R.string.correct_message);
-
+            score+=1;
+            scoreTextView.setText(getString(R.string.updated_score) + score);
             questionBank.removeQuestion(currentQuestion);
 
             if(questionBank.getSize() != 0) {
@@ -124,7 +116,6 @@ public class MainActivity extends AppCompatActivity {
 
         }
         else{
-            feedbackTextView.setText(R.string.incorrect_answer_message);
             showInfoDialog(this, "YOU LOST :(","Sorry bout that. Restart game to try again!");
             disableButtons();
             gamesLost++;
@@ -230,8 +221,8 @@ public class MainActivity extends AppCompatActivity {
 
         private void startNewGame() {
             enableButtons();
-
-            feedbackTextView.setText(" ");
+            score = 0;
+            scoreTextView.setText(getString(R.string.updated_score) + score);
             questionBank = createQuestionBank();
             currentQuestion = questionBank.getNextQuestion();
             this.showQuestion(currentQuestion);
