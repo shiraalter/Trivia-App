@@ -7,9 +7,11 @@ import android.os.Bundle;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.os.PersistableBundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
@@ -17,6 +19,7 @@ import android.widget.TextView;
 
 import java.util.Arrays;
 
+import static com.example.triviaapp.QuestionBank.getJSONFromQuestionBank;
 import static lib.DialogUtils.showInfoDialog;
 
 public class MainActivity extends AppCompatActivity {
@@ -25,7 +28,9 @@ public class MainActivity extends AppCompatActivity {
     private Question currentQuestion;
     private QuestionBank mQuestionBank;
     private int score, gamesWon, totalGamesPlayed, gamesLost;
-    
+    private final String mKEY_GAME = "Game";
+    private String mKEY_AUTO_SAVE;
+
 
 
     @Override
@@ -243,7 +248,14 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
-        //outState.putBoolean();
+        outState.putString("Game", getJSONFromQuestionBank(mQuestionBank));
+    }
+
+    @Override
+    public void onRestoreInstanceState(@Nullable Bundle savedInstanceState, @Nullable PersistableBundle persistentState) {
+        super.onRestoreInstanceState(savedInstanceState, persistentState);
+        mQuestionBank = QuestionBank.getQuestionBankFromJSON(savedInstanceState.getString("Game"));
+        scoreTextView.setText(getString(R.string.updated_score) + score);
     }
 }
 

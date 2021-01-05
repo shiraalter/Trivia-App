@@ -27,7 +27,6 @@ public class QuestionBank {
     public void removeQuestion(Question question){
             mQuestionList.remove(question);
 
-
     }
 
     public int getSize(){
@@ -43,10 +42,8 @@ public class QuestionBank {
         return new Gson() .toJson(obj);
     }
 
-    public String getJSONFromString(){
+    public  String getJSONFromString(){
         return new Gson ().toJson (this);
     }
-
-
 
 }
