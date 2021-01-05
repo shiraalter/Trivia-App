@@ -29,8 +29,7 @@
 
     <string name="about">About</string>
     <string name="rules">The object of this game is to answer all the questions correctly.
-        \n\nIf a single question is answered incorrectly, it is game over.
-        \n\n To </string>
+        \n\nIf a single question is answered incorrectly, it is game over.</string>
     <string name="reset_stats">Reset Stats</string>
     <string name="games_played">Games Played:</string>
     <string name="percent_won">Percent Won</string>
