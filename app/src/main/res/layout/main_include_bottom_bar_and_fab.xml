@@ -25,10 +25,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
-                android:textColor="@android:color/primary_text_dark"
-
-                 />
-
+                android:textColor="@android:color/primary_text_dark"/>
         </LinearLayout>
     </com.google.android.material.bottomappbar.BottomAppBar>
 
@@ -37,8 +34,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|center"
+        android:contentDescription="@string/fab"
         app:layout_anchor="@id/bottom_bar"
         app:layout_anchorGravity="center"
-        app:srcCompat="@android:drawable/ic_dialog_info"
-        android:contentDescription="@string/fab" />
+        app:srcCompat="@android:drawable/ic_dialog_info" />
 </merge>

@@ -1,5 +1,6 @@
 package com.example.triviaapp;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -8,8 +9,6 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-
-import android.view.View;
 
 import android.view.Menu;
 import android.view.MenuItem;
@@ -38,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
         setButtonListeners();
     }
 
+    @SuppressLint("SetTextI18n")
     private void setupFields() {
         questionTextView = findViewById(R.id.question);
         scoreTextView = findViewById(R.id.scoreUpdate);
@@ -60,42 +60,31 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setButtonListeners() {
-        option1Button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                int indexOfOptionSelected = 0;
+        option1Button.setOnClickListener(v -> {
+            int indexOfOptionSelected = 0;
 
-                validateChoice(indexOfOptionSelected);
-            }
+            validateChoice(indexOfOptionSelected);
         });
 
-        option2Button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                int indexOfOptionSelected = 1;
+        option2Button.setOnClickListener(v -> {
+            int indexOfOptionSelected = 1;
 
-                validateChoice(indexOfOptionSelected);
-            }
+            validateChoice(indexOfOptionSelected);
         });
 
-        option3Button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                int indexOfOptionSelected = 2;
+        option3Button.setOnClickListener(v -> {
+            int indexOfOptionSelected = 2;
 
-               validateChoice(indexOfOptionSelected);
-            }
+           validateChoice(indexOfOptionSelected);
         });
 
-        option4Button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                int indexOfOptionSelected = 3;
-                validateChoice(indexOfOptionSelected);
-            }
+        option4Button.setOnClickListener(v -> {
+            int indexOfOptionSelected = 3;
+            validateChoice(indexOfOptionSelected);
         });
     }
 
+    @SuppressLint("SetTextI18n")
     private void validateChoice(int indexOfOptionSelected) {
         if(indexOfOptionSelected == currentQuestion.getAnswerIndex()){
             //answer is correct!
@@ -157,13 +146,8 @@ public class MainActivity extends AppCompatActivity {
 
     private void setupFAB() {
         FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                showInfoDialog(MainActivity.this,
-                        getString(R.string.info_title), getString(R.string.rules));
-            }
-        });
+        fab.setOnClickListener(view -> showInfoDialog(MainActivity.this,
+                getString(R.string.info_title), getString(R.string.rules)));
     }
 
     //creates menu options
@@ -179,6 +163,7 @@ public class MainActivity extends AppCompatActivity {
         super.onStop();
     }
 
+    @SuppressLint("NonConstantResourceId")
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
 
@@ -219,6 +204,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+        @SuppressLint("SetTextI18n")
         private void startNewGame() {
             enableButtons();
             score = 0;
