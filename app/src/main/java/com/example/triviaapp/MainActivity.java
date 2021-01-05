@@ -7,9 +7,11 @@ import android.os.Bundle;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.os.PersistableBundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
@@ -17,14 +19,18 @@ import android.widget.TextView;
 
 import java.util.Arrays;
 
+import static com.example.triviaapp.QuestionBank.getJSONFromQuestionBank;
 import static lib.DialogUtils.showInfoDialog;
 
 public class MainActivity extends AppCompatActivity {
     private TextView questionTextView, scoreTextView;
     private Button option1Button, option2Button, option3Button, option4Button;
     private Question currentQuestion;
-    private QuestionBank questionBank;
+    private QuestionBank mQuestionBank;
     private int score, gamesWon, totalGamesPlayed, gamesLost;
+    private final String mKEY_GAME = "Game";
+    private String mKEY_AUTO_SAVE;
+
 
 
     @Override
@@ -48,8 +54,8 @@ public class MainActivity extends AppCompatActivity {
         option3Button = findViewById(R.id.option3);
         option4Button = findViewById(R.id.option4);
 
-        questionBank = createQuestionBank();
-        currentQuestion = questionBank.getNextQuestion();
+        mQuestionBank = createQuestionBank();
+        currentQuestion = mQuestionBank.getNextQuestion();
         this.showQuestion(currentQuestion);
 
          score = 0;
@@ -90,10 +96,10 @@ public class MainActivity extends AppCompatActivity {
             //answer is correct!
             score+=1;
             scoreTextView.setText(getString(R.string.updated_score) + score);
-            questionBank.removeQuestion(currentQuestion);
+            mQuestionBank.removeQuestion(currentQuestion);
 
-            if(questionBank.getSize() != 0) {
-                currentQuestion = questionBank.getNextQuestion();
+            if(mQuestionBank.getSize() != 0) {
+                currentQuestion = mQuestionBank.getNextQuestion();
                 this.showQuestion(currentQuestion);
             }
             else{
@@ -209,8 +215,8 @@ public class MainActivity extends AppCompatActivity {
             enableButtons();
             score = 0;
             scoreTextView.setText(getString(R.string.updated_score) + score);
-            questionBank = createQuestionBank();
-            currentQuestion = questionBank.getNextQuestion();
+            mQuestionBank = createQuestionBank();
+            currentQuestion = mQuestionBank.getNextQuestion();
             this.showQuestion(currentQuestion);
 
         }
@@ -229,6 +235,27 @@ public class MainActivity extends AppCompatActivity {
 
     private void toggleMenuItem(MenuItem item) {
         item.setChecked(!item.isChecked());
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+    }
+
+    /*
+        SAVE STATE
+         */
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putString("Game", getJSONFromQuestionBank(mQuestionBank));
+    }
+
+    @Override
+    public void onRestoreInstanceState(@Nullable Bundle savedInstanceState, @Nullable PersistableBundle persistentState) {
+        super.onRestoreInstanceState(savedInstanceState, persistentState);
+        mQuestionBank = QuestionBank.getQuestionBankFromJSON(savedInstanceState.getString("Game"));
+        scoreTextView.setText(getString(R.string.updated_score) + score);
     }
 }
 
