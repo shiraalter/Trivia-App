@@ -27,4 +27,12 @@
         android:icon="@android:drawable/ic_dialog_info"
         android:title="@string/about"
         app:showAsAction="never" />
+
+    <item
+        android:id="@+id/reset_stats"
+        android:icon="@android:drawable/ic_dialog_info"
+        android:title="@string/reset_stats"
+        app:showAsAction="never" />
+
+
 </menu>
