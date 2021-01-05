@@ -123,9 +123,8 @@ public class MainActivity extends AppCompatActivity {
         }
         else{
             feedbackTextView.setText(R.string.incorrect_answer_message);
-
+            showInfoDialog(this, "YOU LOST :(","Sorry bout that. Restart game to try again!");
             disableButtons();
-
             gamesLost++;
             totalGamesPlayed++;
         }
@@ -232,6 +231,7 @@ public class MainActivity extends AppCompatActivity {
         private void startNewGame() {
             enableButtons();
 
+            feedbackTextView.setText(" ");
             questionBank = createQuestionBank();
             currentQuestion = questionBank.getNextQuestion();
             this.showQuestion(currentQuestion);
