@@ -22,26 +22,15 @@ import java.util.Arrays;
 import static lib.DialogUtils.showInfoDialog;
 
 public class MainActivity extends AppCompatActivity {
-    private Snackbar mSnackBar;
+
 
 
     private TextView questionTextView, feedbackTextView;
     private Button option1Button, option2Button, option3Button, option4Button;
     private Question currentQuestion;
     private QuestionBank questionBank;
-    private int score;
+    private int score, gamesWon, totalGamesPlayed, gamesLost;
 
-
-
-
-
-    // Preference booleans; indicates if these respective settings currently enabled/disabled
-    private boolean mPrefUseAutoSave;
-
-    // Name of Preference file on device
-    private final String mKeyPrefsName = "PREFS";
-    // Preference Keys: values are already in strings.xml and will be assigned to these in onCreate
-    private String mKeyAutoSave;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
         setupToolbar();
         setupFAB();
         setButtonListeners();
-        //restoreAppSettingsFromPrefs();
+
 
 
     }
@@ -68,6 +57,11 @@ public class MainActivity extends AppCompatActivity {
 
         currentQuestion = questionBank.getNextQuestion();
         this.showQuestion(currentQuestion);
+
+         score = 0;
+         gamesWon = 0;
+         totalGamesPlayed = 0;
+         gamesLost = 0;
 
     }
 
@@ -103,12 +97,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 int indexOfOptionSelected = 3;
-
                 validateChoice(indexOfOptionSelected);
-
             }
         });
-
     }
 
     private void validateChoice(int indexOfOptionSelected) {
@@ -123,15 +114,27 @@ public class MainActivity extends AppCompatActivity {
                 this.showQuestion(currentQuestion);
             }
             else{
-                showInfoDialog(this, "GAME OVER","GREAT JOB! YOU WON! You can restart the game or exit the application");
-                //TODO: disable buttons
+                showInfoDialog(this, "YOU WON!!!","GREAT JOB! You can restart the game or exit the application");
+                disableButtons();
+                gamesWon++;
+                totalGamesPlayed++;
             }
-
 
         }
         else{
             feedbackTextView.setText(R.string.incorrect_answer_message);
+            showInfoDialog(this, "YOU LOST :(","Sorry bout that. Restart game to try again!");
+            disableButtons();
+            gamesLost++;
+            totalGamesPlayed++;
         }
+    }
+
+    private void disableButtons() {
+        option1Button.setEnabled(false);
+        option2Button.setEnabled(false);
+        option3Button.setEnabled(false);
+        option4Button.setEnabled(false);
     }
 
 
@@ -180,7 +183,6 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onStop() {
-       // saveToSharedPref();
         super.onStop();
     }
 
@@ -196,7 +198,7 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             case R.id.action_toggle_auto_save:
                 toggleMenuItem(item);
-                mPrefUseAutoSave = item.isChecked();
+              //  mPrefUseAutoSave = item.isChecked();
                 return true;
             case R.id.action_statistics:
                 showStatistics();
@@ -204,9 +206,19 @@ public class MainActivity extends AppCompatActivity {
             case R.id.new_game:
                 startNewGame();
                 return true;
+            case R.id.reset_stats:
+                resetStats();
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    private void resetStats() {
+        gamesLost = 0;
+        gamesWon = 0;
+        totalGamesPlayed = 0;
+        //reset stats activity
     }
 
     private void showStatistics() {
@@ -217,12 +229,21 @@ public class MainActivity extends AppCompatActivity {
 
 
         private void startNewGame() {
-           // startGameAndSetBoard(new PMGame(), null, R.string.welcome_new_game);
+            enableButtons();
+
+            feedbackTextView.setText(" ");
             questionBank = createQuestionBank();
             currentQuestion = questionBank.getNextQuestion();
             this.showQuestion(currentQuestion);
 
         }
+
+    private void enableButtons() {
+        option1Button.setEnabled(true);
+        option2Button.setEnabled(true);
+        option3Button.setEnabled(true);
+        option4Button.setEnabled(true);
+    }
 
 
     private void showAbout() {
@@ -235,87 +256,6 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-   /* private void restoreAppSettingsFromPrefs() {
-        // Since this is for reading only, no editor is needed unlike in saveRestoreState
-        SharedPreferences preferences = getSharedPreferences(mKeyPrefsName, MODE_PRIVATE);
-
-        // restore AutoSave preference value
-        mPrefUseAutoSave = preferences.getBoolean(mKeyAutoSave, true);
-    }
-
-    private void saveGameAndBoardToSharedPrefsIfAutoSaveIsOn(SharedPreferences.Editor editor) {
-        System.out.println("placeholder");
-    }
-
-    private void saveSettingsToSharedPrefs(SharedPreferences.Editor editor) {
-        // save "autoSave" preference
-        editor.putBoolean(mKeyAutoSave, mPrefUseAutoSave);
-    }
-    private void saveToSharedPref() {
-        // Create a SP reference to the prefs file on the device whose name matches mKeyPrefsName
-        // If the file on the device does not yet exist, then it will be created
-        SharedPreferences preferences = getSharedPreferences(mKeyPrefsName, MODE_PRIVATE);
-
-        // Create an Editor object to write changes to the preferences object above
-        SharedPreferences.Editor editor = preferences.edit();
-
-        // clear whatever was set last time
-        editor.clear();
-
-        // save the settings (Show Errors and Use AutoSave)
-        saveSettingsToSharedPrefs(editor);
-
-        // if autoSave is on then save the board
-        saveGameAndBoardToSharedPrefsIfAutoSaveIsOn(editor);
-
-        // apply the changes to the XML file in the device's storage
-        editor.apply();
-    }
-*/
 
 
 }

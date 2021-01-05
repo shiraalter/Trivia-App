@@ -27,4 +27,9 @@
     <string name="statistics">View Statistics</string>
 
     <string name="about">About</string>
+    <string name="reset_stats">Reset Stats</string>
+    <string name="games_played">Games Played:</string>
+    <string name="percent_won">Percent Won</string>
+    <string name="games_won">Games Won</string>
+    <string name="games_lost">Games Lost</string>
 </resources>

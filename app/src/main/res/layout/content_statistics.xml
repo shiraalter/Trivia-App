@@ -3,4 +3,86 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior"></androidx.constraintlayout.widget.ConstraintLayout>
+    app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin= "100dp" />
+
+
+    <TextView
+        android:id="@+id/tv_label_games_played"
+        android:layout_marginTop="@dimen/default_margin"
+        android:text="@string/games_played"
+        app:layout_constraintEnd_toStartOf="@+id/tv_data_games_played"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_height="30dp"
+        android:layout_width="wrap_content" />
+
+        <TextView
+            android:id="@+id/tv_data_games_played"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_marginStart="@dimen/default_margin"
+            android:layout_marginLeft="@dimen/default_margin"
+            android:layout_marginTop="@dimen/default_margin"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/tv_label_games_played"
+            app:layout_constraintTop_toTopOf="parent"
+            android:text="18"/>
+
+    <TextView
+        android:id="@+id/tv_label_header_wins"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/games_won"
+        app:layout_constraintStart_toStartOf="@id/guideline"
+        app:layout_constraintTop_toBottomOf="@+id/tv_label_games_played" />
+
+    <!--Games Won data -->
+    <TextView
+        android:id="@+id/tv_data_player1_wins"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_marginTop="20dp"
+        app:layout_constraintEnd_toEndOf="@+id/tv_label_header_wins"
+        app:layout_constraintStart_toStartOf="@+id/tv_label_header_wins"
+        app:layout_constraintTop_toBottomOf="@+id/tv_label_header_wins"
+        android:text="6" />
+
+    <TextView
+        android:id="@+id/tv_label_games_lost"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_marginStart="50dp"
+        android:layout_marginLeft="30dp"
+        android:text="@string/games_lost"
+        app:layout_constraintStart_toEndOf="@+id/tv_label_header_wins"
+        app:layout_constraintTop_toTopOf="@+id/tv_label_header_wins" />
+
+    <!--Game Lost data -->
+    <TextView
+        android:id="@+id/tv_data_player1_win_percent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        app:layout_constraintEnd_toEndOf="@+id/tv_label_games_lost"
+        app:layout_constraintStart_toStartOf="@+id/tv_label_games_lost"
+        app:layout_constraintTop_toBottomOf="@+id/tv_label_games_lost"
+        android:text="5" />
+
+
+
+
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
