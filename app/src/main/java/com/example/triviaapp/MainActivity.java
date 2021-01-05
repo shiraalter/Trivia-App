@@ -1,6 +1,7 @@
 package com.example.triviaapp;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -19,6 +20,7 @@ import android.widget.TextView;
 
 import java.util.Arrays;
 
+import static androidx.preference.PreferenceManager.getDefaultSharedPreferences;
 import static lib.DialogUtils.showInfoDialog;
 
 public class MainActivity extends AppCompatActivity {
@@ -30,6 +32,9 @@ public class MainActivity extends AppCompatActivity {
     private Question currentQuestion;
     private QuestionBank questionBank;
     private int score;
+    private String mKEY_AUTO_SAVE;
+    private boolean mUseAutoSave;
+    private final String mKEY_GAME = "GAME";
 
 
 
@@ -57,6 +62,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setupFields() {
+        mKEY_AUTO_SAVE = getString(R.string.auto_save_key);
         questionTextView = findViewById(R.id.question);
         feedbackTextView = findViewById(R.id.feedbackMessage);
         option1Button = findViewById(R.id.option1);
@@ -164,8 +170,8 @@ public class MainActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                showInfoDialog(MainActivity.this,
+                        getString(R.string.info_title), getString(R.string.rules));
             }
         });
     }
@@ -184,7 +190,11 @@ public class MainActivity extends AppCompatActivity {
         super.onStop();
     }
 
-
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        menu.findItem(R.id.action_toggle_auto_save).setChecked(mPrefUseAutoSave);
+        return super.onPrepareOptionsMenu(menu);
+    }
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
@@ -275,11 +285,23 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+    private void restoreOrSetFromPreferences_AllAppAndGameSettings() {
+        SharedPreferences sp = getDefaultSharedPreferences(this);
+        mUseAutoSave = sp.getBoolean(mKEY_AUTO_SAVE, true);
+    }
+    private void restoreFromPreferences_SavedGameIfAutoSaveWasSetOn() {
+        SharedPreferences defaultSharedPreferences = getDefaultSharedPreferences(this);
+        if (defaultSharedPreferences.getBoolean(mKEY_AUTO_SAVE,true)) {
+            String gameString = defaultSharedPreferences.getString(mKEY_GAME, null);
+            if (gameString!=null) {
+                //currentQuestion = QuestionBank.getGameFromJSON(gameString);
+                //updateUI();
+                System.out.println("to be done");
+            }
+        }
+    }
 
-
-
-
-   /* private void restoreAppSettingsFromPrefs() {
+   private void restoreAppSettingsFromPrefs() {
         // Since this is for reading only, no editor is needed unlike in saveRestoreState
         SharedPreferences preferences = getSharedPreferences(mKeyPrefsName, MODE_PRIVATE);
 
@@ -295,6 +317,21 @@ public class MainActivity extends AppCompatActivity {
         // save "autoSave" preference
         editor.putBoolean(mKeyAutoSave, mPrefUseAutoSave);
     }
+
+    private void saveOrDeleteGameInSharedPrefs(){
+        SharedPreferences defaultSharedPreferences = getDefaultSharedPreferences(this);
+        SharedPreferences.Editor editor = defaultSharedPreferences.edit();
+
+        //Save current game or remove any prior game to/from default shared preferences
+        if(mUseAutoSave)
+            //editor.putString(mKEY_GAME, questionBank.getJSONFromCurrentGame());
+            System.out.println();
+        else
+            editor.remove(mKEY_GAME);
+
+        editor.apply();
+    }
+
     private void saveToSharedPref() {
         // Create a SP reference to the prefs file on the device whose name matches mKeyPrefsName
         // If the file on the device does not yet exist, then it will be created
@@ -315,7 +352,7 @@ public class MainActivity extends AppCompatActivity {
         // apply the changes to the XML file in the device's storage
         editor.apply();
     }
-*/
+
 
 
 }

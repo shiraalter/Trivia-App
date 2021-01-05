@@ -8,6 +8,7 @@
     <string name="key_use_auto_save">AUTO_SAVE</string>
     <string name="title_use_auto_save">Use Auto-Save</string>
 
+    <string name="info_title">How to Play</string>
     <string name="fab">FAB</string>
     <string name="correct_message">Good Job! Onto the next question</string>
     <string name="incorrect_answer_message">Wrong! Game over. \nPress New Game to play again</string>
@@ -27,4 +28,7 @@
     <string name="statistics">View Statistics</string>
 
     <string name="about">About</string>
+    <string name="rules">The object of this game is to answer all the questions correctly.
+        \n\nIf a single question is answered incorrectly, it is game over.
+        \n\n To </string>
 </resources>
