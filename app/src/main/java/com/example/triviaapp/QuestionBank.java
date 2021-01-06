@@ -9,6 +9,9 @@ import java.util.List;
 public class QuestionBank {
     private List<Question> mQuestionList;
     private int mNextQuestionIndex;
+    private int mNumberOfGamesPlayed;
+    private int mGamesWon;
+    private int mGamesLost;
 
     public QuestionBank(List<Question> questionList){
         mQuestionList = new ArrayList<>(questionList);
@@ -29,6 +32,10 @@ public class QuestionBank {
 
     }
 
+    public Question getCurrentQuestion(){
+        return mQuestionList.get(0);
+    }
+
     public int getSize(){
         return mQuestionList.size();
     }
@@ -46,4 +53,33 @@ public class QuestionBank {
         return new Gson ().toJson (this);
     }
 
+    public int getNumberOfGamesPlayed() {
+        return  mNumberOfGamesPlayed;
+    }
+
+    public void setmNumberOfGamesPlayed(int totalGamesPlayed){
+        mNumberOfGamesPlayed = totalGamesPlayed;
+    }
+
+    public void resetStats(){
+        mNumberOfGamesPlayed = 0;
+        mGamesWon = 0;
+        mGamesLost = 0;
+    }
+
+    public void setmNumberGamesWon(int gamesWon) {
+        mGamesWon = gamesWon;
+    }
+
+    public int getmGamesWon() {
+        return mGamesWon;
+    }
+
+    public void setmNumberGamesLost(int gamesLost) {
+        mGamesLost = gamesLost;
+    }
+
+    public int getmGamesLost() {
+        return mGamesLost;
+    }
 }
