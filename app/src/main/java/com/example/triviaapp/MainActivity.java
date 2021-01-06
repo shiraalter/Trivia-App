@@ -210,7 +210,7 @@ public class MainActivity extends AppCompatActivity {
         Question question10 = new Question("How many of Snow White’s seven dwarfs have names ending in the letter Y?",
                 Arrays.asList("Three", "Five", "Four", "Six"), 1);
         Question question11 = new Question("What is the tallest breed of dog in the world?",
-                Arrays.asList("German Shepherd", "Golden Retriever", "The Great Dane", ""), 2);
+                Arrays.asList("German Shepherd", "Golden Retriever", "The Great Dane", "Saint Bernard"), 2);
         Question question12 = new Question("How many ribs are in a human body?",
                 Arrays.asList("Twenty-six", "Twenty-Two", "Twenty", "Twenty-four"), 3);
         Question question13 = new Question("What is the world’s biggest island?",
