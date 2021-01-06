@@ -16,7 +16,7 @@
     <string name="option_2">Option 2</string>
     <string name="option_3">Option 3</string>
     <string name="option_4">Option 4</string>
-    <string name="question_goes_here">Question goes here</string>
+    <string name="question_goes_here">Game Over Press New Game to Play Again</string>
     <string name="new_game">New Game</string>
     <string name="next_question">Next Question</string>
 
@@ -36,4 +36,8 @@
     <string name="games_won">Games Won</string>
     <string name="games_lost">Games Lost</string>
     <string name="updated_score">Score: </string>
+    <string name="score_save_state">Score</string>
+    <string name="total_games_save_state">Total Games Played</string>
+    <string name="games_won_save_state">Games Won</string>
+    <string name="games_lost_save_state">Games lost</string>
 </resources>

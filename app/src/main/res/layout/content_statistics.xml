@@ -35,7 +35,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/tv_label_games_played"
             app:layout_constraintTop_toTopOf="parent"
-            android:text="18"/>
+            />
 
     <TextView
         android:id="@+id/tv_label_header_wins"
@@ -55,7 +55,7 @@
         app:layout_constraintEnd_toEndOf="@+id/tv_label_header_wins"
         app:layout_constraintStart_toStartOf="@+id/tv_label_header_wins"
         app:layout_constraintTop_toBottomOf="@+id/tv_label_header_wins"
-        android:text="6" />
+         />
 
     <TextView
         android:id="@+id/tv_label_games_lost"
@@ -69,14 +69,14 @@
 
     <!--Game Lost data -->
     <TextView
-        android:id="@+id/tv_data_player1_win_percent"
+        android:id="@+id/tv_data_player1_losses"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         app:layout_constraintEnd_toEndOf="@+id/tv_label_games_lost"
         app:layout_constraintStart_toStartOf="@+id/tv_label_games_lost"
         app:layout_constraintTop_toBottomOf="@+id/tv_label_games_lost"
-        android:text="5" />
+         />
 
 
 
